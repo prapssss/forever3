@@ -1,0 +1,120 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Footer styles */
+.footer {
+  width: 100%;
+  background-color: #ffffff;
+  color: #5c4d44;
+  padding: 2rem 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Shadow to give a 3D lift */
+  position: relative;
+  z-index: 1;
+}
+ 
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .footer-logo {
+    display: block;
+    padding: 6px 12px;
+    color: #5e2d0e; /* Slightly lighter */
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+    font-size: 18px;
+  }
+  
+  .logo-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #8a7267;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .footer h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .footer h3 {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer p, .footer a {
+    font-size: 0.875rem;
+  }
+  
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .footer a {
+    color: #5c4d44;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #8a7267;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #c9b5ac;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+  
+  .policy-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .policy-links a {
+    font-size: 0.75rem;
+  }

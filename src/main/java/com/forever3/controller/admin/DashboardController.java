@@ -7,8 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.forever3.util.SessionUtil;
-
 /**
  * Servlet implementation class DashboardController
  */

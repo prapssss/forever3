@@ -36,7 +36,8 @@ public class AuthenticationFilter implements Filter {
     private static final String CUSTOMERS = "/customers";
     private static final String PRODUCTS = "/products";
     private static final String PRODUCT_MANAGEMENT = "/productmanagement";
-    
+    private static final String DELETE_CUSTOMER = "/delete-customer"; // Added this
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // Optional initialization
@@ -56,7 +57,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        // ✅ Always allow logout, regardless of login state
+        // Always allow logout
         if (uri.endsWith(LOGOUT)) {
             chain.doFilter(request, response);
             return;
@@ -105,8 +106,9 @@ public class AuthenticationFilter implements Filter {
                uri.endsWith(ORDERS) || 
                uri.endsWith(CUSTOMERS) || 
                uri.endsWith(PRODUCTS) ||
-               uri.endsWith(PRODUCT_MANAGEMENT);
-        
+               uri.endsWith(PRODUCT_MANAGEMENT) ||
+               uri.endsWith(DELETE_CUSTOMER);  // <-- Added this line
+    
         if (result) {
             System.out.println("Identified as admin page: " + uri);
         }

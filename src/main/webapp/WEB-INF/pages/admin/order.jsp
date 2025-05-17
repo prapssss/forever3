@@ -11,7 +11,7 @@
 </head>
 <body>
 <jsp:include page="nav.jsp" />
-    <div class="admin-content">
+    
             <div class="admin-header">
                 <h1>Order Management</h1>
                 <div class="header-actions">
@@ -27,8 +27,8 @@
                 <div class="filter-container">
                     <select class="filter-select">
                         <option value="">All Types</option>
-                        <option value="online">Online</option>
-                        <option value="in-store">In-store</option>
+                        <option value="online">Makeup</option>
+                        <option value="in-store">Skincare</option>
                     </select>
                     <button class="filter-btn">Filter</button>
                 </div>
@@ -75,16 +75,7 @@
                 </div>
             </div>
 
-            <div class="pagination">
-                <button class="pagination-btn" disabled>Previous</button>
-                <div class="page-numbers">
-                    <button class="page-number active">1</button>
-                    <button class="page-number">2</button>
-                    <button class="page-number">3</button>
-                </div>
-                <button class="pagination-btn">Next</button>
-            </div>
-        </div>
+            
    
 </body>
 </html>

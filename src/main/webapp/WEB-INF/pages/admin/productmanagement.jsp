@@ -13,7 +13,7 @@
 	<jsp:include page="nav.jsp" />
     <div class="container">
         <div class="header">
-            <h2>Product Management</h2> <br> 
+            <h2>Product Management</h2> <br> <br> 
             <p>View and manage your customer orders</p> 
                         <button class="new-order-btn">+ New Order</button>
         </div>

@@ -8,6 +8,12 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.admin-content {
+  flex: 1;
+  padding: 30px;
+  margin-left: 220px; /* Add this line to shift content to the right */
+}
+
 body {
   background-color: #f4f1ee;
   color: #333;

@@ -1,38 +1,32 @@
 @charset "UTF-8";
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-.admin-content {
-  flex: 1;
-  padding: 30px;
-  margin-left: 220px; /* Add this line to shift content to the right */
-}
 
 body {
   background-color: #f5f3ef;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  padding: 20px;
+  padding: 0;
+  display: block;
 }
 
+/* Container and Layout */
 .container {
-  max-width: 1200px;
-  width: 100%;
+  margin-left: 250px;
+  max-width: calc(100% - 250px);
+  width: auto;
   background-color: #fff;
-  border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   padding: 30px;
+  min-height: 100vh;
 }
 
+/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -47,24 +41,8 @@ body {
   margin-right: 20px;
 }
 
-.header p {
-  font-size: 16px;
-  color: #6b5e54;
-  flex-grow: 1;
-}
-
-        body {
-            display: block;
-            padding: 0;
-        }
-
-        .container {
-            margin-left: 250px;
-            max-width: calc(100% - 250px);
-            width: auto;
-            border-radius: 0;
-        }
-.new-order-btn {
+/* Add Product Button */
+.new-product-btn {
   padding: 12px 20px;
   background-color: #b59f89;
   border: none;
@@ -76,85 +54,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.new-order-btn:hover {
+.new-product-btn:hover {
   background-color: #a08874;
 }
 
-.filters {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.search-container {
-  position: relative;
-  flex: 1;
-  min-width: 250px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 12px 12px 40px;
-  border: 1px solid #d1cfc9;
-  border-radius: 8px;
-  font-size: 15px;
-  background-color: #fefefe;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #b59f89;
-  box-shadow: 0 0 5px rgba(181, 159, 137, 0.4);
-}
-
-.search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #6b5e54;
-}
-
-.filter-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.filter-select {
-  padding: 12px;
-  border: 1px solid #d1cfc9;
-  border-radius: 8px;
-  font-size: 15px;
-  background-color: #fefefe;
-  color: #6b5e54;
-  min-width: 150px;
-}
-
-.filter-select:focus {
-  outline: none;
-  border-color: #b59f89;
-  box-shadow: 0 0 5px rgba(181, 159, 137, 0.4);
-}
-
-.filter-btn, .export-btn {
-  padding: 12px 20px;
-  background-color: #fefefe;
-  border: 1px solid #d1cfc9;
-  border-radius: 8px;
-  color: #6b5e54;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-btn:hover, .export-btn:hover {
-  background-color: #f5f3ef;
-  border-color: #b59f89;
-}
-
+/* Table Container and Styling */
 .table-container {
   overflow-x: auto;
   margin-bottom: 25px;
@@ -162,116 +66,78 @@ body {
   border: 1px solid #d1cfc9;
 }
 
-.orders-table {
+.products-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
-.orders-table th, .orders-table td {
+.products-table th, 
+.products-table td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #d1cfc9;
 }
 
-.orders-table th {
+.products-table th {
   background-color: #f5f3ef;
   color: #4d3c32;
   font-weight: bold;
 }
 
-.orders-table tr:last-child td {
+.products-table tr:last-child td {
   border-bottom: none;
 }
 
-.orders-table tr:hover {
+.products-table tr:hover {
   background-color: #f9f8f6;
 }
 
-.status-badge {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 20px;
+/* Action Buttons */
+.action-btn {
+  padding: 8px 12px;
+  border: 1px solid #d1cfc9;
+  border-radius: 4px;
   font-size: 14px;
-  font-weight: 600;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: all 0.2s ease;
 }
 
-.status-badge.paid {
+/* Individual Action Styles */
+.edit-btn {
+  background-color: #f5f3ef;
+  color: #6b5e54;
+}
+
+.edit-btn:hover {
+  background-color: #e8e5e0;
+}
+
+.stock-btn {
   background-color: #e6f4ea;
   color: #34a853;
 }
 
-.status-badge.pending {
-  background-color: #fef7e0;
-  color: #fbbc04;
+.stock-btn:hover {
+  background-color: #d4eadf;
 }
 
-.status-badge.failed {
+.delete-btn {
   background-color: #fce8e6;
   color: #ea4335;
 }
 
-.actions {
-  display: flex;
-  gap: 5px;
+.delete-btn:hover {
+  background-color: #f9d5d2;
 }
 
-.action-btn {
-  padding: 6px 12px;
-  background-color: #f5f3ef;
-  border: 1px solid #d1cfc9;
-  border-radius: 4px;
-  color: #6b5e54;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.action-btn:hover {
-  background-color: #e8e5e0;
-  border-color: #b59f89;
-}
-
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.pagination-info {
-  color: #6b5e54;
-  font-size: 14px;
-}
-
-.pagination-info span {
-  font-weight: 600;
-}
-
-.pagination-controls {
-  display: flex;
-  gap: 10px;
-}
-
-.pagination-btn {
-  padding: 8px 16px;
-  background-color: #fefefe;
-  border: 1px solid #d1cfc9;
-  border-radius: 8px;
-  color: #6b5e54;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pagination-btn:hover:not([disabled]) {
-  background-color: #f5f3ef;
-  border-color: #b59f89;
-}
-
-.pagination-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -289,32 +155,29 @@ body {
     margin-right: 0;
   }
   
-  .header p {
-    margin-bottom: 15px;
-  }
-  
-  .new-order-btn {
+  .new-product-btn {
     width: 100%;
   }
   
-  .filters {
-    flex-direction: column;
+  .action-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-table {
+    font-size: 14px;
   }
   
-  .search-container {
+  .products-table th, 
+  .products-table td {
+    padding: 10px 8px;
+  }
+  
+  .action-btn {
+    margin-bottom: 5px;
     width: 100%;
-  }
-  
-  .filter-options {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .filter-select, .filter-btn, .export-btn {
-    flex-grow: 1;
-  }
-  
-  .actions {
-    flex-direction: column;
+    text-align: center;
   }
 }

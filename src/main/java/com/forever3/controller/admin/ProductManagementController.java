@@ -1,33 +1,46 @@
 package com.forever3.controller.admin;
 
+import com.forever3.model.ProductModel;
+import com.forever3.service.ProductService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
 
-/**
- * Servlet implementation class ProductManagementController
- */
-@WebServlet(asyncSupported = true, urlPatterns = { "/productmanagement" })
+@WebServlet(asyncSupported = true, urlPatterns = {"/productmanagement"})
 public class ProductManagementController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductManagementController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+
+    private ProductService productService = new ProductService();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        List<ProductModel> products = productService.getAllProducts();
+        request.setAttribute("products", products);
         request.setAttribute("activePage", "productmanagement");
         request.getRequestDispatcher("/WEB-INF/pages/admin/productmanagement.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        if ("delete".equals(action)) {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                boolean deleted = productService.deleteProduct(id);
+                if (!deleted) {
+                    System.out.println("Product not found or could not be deleted for ID: " + id);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        response.sendRedirect("productmanagement");
     }
 }

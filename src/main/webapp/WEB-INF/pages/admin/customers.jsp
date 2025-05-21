@@ -7,24 +7,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Customer Management</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/customers.css" />
 </head>
 <body>
 
+    <!-- Navigation sidebar included from nav.jsp -->
     <jsp:include page="/WEB-INF/pages/admin/nav.jsp" />
 
+    <!-- Admin Header -->
     <div class="admin-header">
         <h1>Customer Management</h1>
     </div>
 
+    <!-- Customer List -->
     <div class="customer-list">
         <div class="list-header">
             <div class="header-item customer-name-header">Customer Name</div>
             <div class="header-item">Email</div>
             <div class="header-item">Phone</div>
             <div class="header-item">Orders</div>
-            <div class="customer-status">Payment Status</div>
+            <div class="header-item">Payment Status</div>
             <div class="header-item">Actions</div>
         </div>
 
@@ -43,20 +47,16 @@
                 <div class="customer-status paid">Paid</div> <!-- Placeholder, can be dynamic in the future -->
 
                 <div class="customer-actions">
+                    <!-- View Button -->
+                    <a href="${contextPath}/viewcustomer?id=${customer.id}">
+                        <button class="view-order-btn">View</button>
+                    </a>
                     <!-- Delete Button -->
-                    <form action="${contextPath}/delete-customer" method="post" 
-                          onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                    <form action="${contextPath}/deletecustomer" method="post"
+                        onsubmit="return confirm('Are you sure you want to delete this customer?');">
                         <input type="hidden" name="customerId" value="${customer.id}" />
                         <button type="submit" class="delete-btn">Delete</button>
                     </form>
-
-					
-						
-
-                    <!-- View Button -->
-                    <a href="${contextPath}/view-customer?id=${customer.id}">
-                        <button class="view-order-btn">View</button>
-                    </a>
                 </div>
             </div>
         </c:forEach>

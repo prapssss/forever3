@@ -13,26 +13,32 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard" })
-public class DashboardController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet("/viewcustomer")
+public class ViewCustomerController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<UserModel> customers = new ArrayList<>();
-        int totalCustomers = 0;
+        String idParam = request.getParameter("id");
 
-        try (Connection conn = DbConfig.getDbConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customer WHERE role = 'customer'");
-             ResultSet rs = stmt.executeQuery()) {
+        if (idParam == null || idParam.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/customers");
+            return;
+        }
 
-            while (rs.next()) {
-                UserModel user = new UserModel(
+        int customerId = Integer.parseInt(idParam);
+        UserModel customer = null;
+
+        try (Connection conn = DbConfig.getDbConnection()) {
+            String sql = "SELECT * FROM customer WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                customer = new UserModel(
                     rs.getInt("id"),
                     rs.getString("first_name"),
                     rs.getString("last_name"),
@@ -43,19 +49,17 @@ public class DashboardController extends HttpServlet {
                     rs.getString("image_url"),
                     rs.getString("role")
                 );
-                customers.add(user);
             }
-
-            totalCustomers = customers.size(); // ✅ get count
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        request.setAttribute("customers", customers);
-        request.setAttribute("totalCustomers", totalCustomers); // ✅ pass to JSP
-        request.setAttribute("activePage", "dashboard");
+        if (customer == null) {
+            response.sendRedirect(request.getContextPath() + "/customers");
+            return;
+        }
 
-        request.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(request, response);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/WEB-INF/pages/admin/viewcustomer.jsp").forward(request, response);
     }
 }

@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
         	System.out.println("Admin login successful");
             SessionUtil.setAttribute(req, "username", username);
             CookieUtil.addCookie(resp, "role", "admin", 3 * 50); // Role: admin
-            req.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(req,resp);
+            resp.sendRedirect(req.getContextPath() + "/dashboard");
             return; // Exit method after admin login
         }
 

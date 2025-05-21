@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebServlet("/delete-customer")
+@WebServlet("/deletecustomer")
 public class DeleteCustomerController extends HttpServlet {
 
     @Override

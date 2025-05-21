@@ -2,8 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     HttpSession userSession = request.getSession(false);
+    Integer customerId = (Integer) (userSession != null ? userSession.getAttribute("customerId") : null);
     String currentUser = (String) (userSession != null ? userSession.getAttribute("username") : null);
     pageContext.setAttribute("currentUser", currentUser);
+    pageContext.setAttribute("customerId", customerId);
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
  
@@ -32,6 +34,9 @@
         <li><a href="${contextPath}/makeup">MakeUp</a></li>
         <li><a href="${contextPath}/aboutus">AboutUs</a></li>
         <li><a href="${contextPath}/contactus">ContactUs</a></li>
+        <c:if test="${not empty customerId}">
+          <li><a href="${contextPath}/orderHistory">Order History</a></li>
+        </c:if>
       </ul>
     </nav>
  
@@ -48,14 +53,14 @@
       <!-- Auth Buttons -->
       <div class="auth-button-container">
         <c:choose>
-          <c:when test="${not empty currentUser}">
+          <c:when test="${not empty customerId}">
             <form action="${pageContext.request.contextPath}/logout" method="post">
-              <button type="submit" class="auth-button ">Logout</button>
+              <button type="submit" class="auth-button">Logout</button>
             </form>
           </c:when>
           <c:otherwise>
             <form action="${pageContext.request.contextPath}/login" method="get">
-              <button type="submit" class="auth-button ">Login</button>
+              <button type="submit" class="auth-button">Login</button>
             </form>
           </c:otherwise>
         </c:choose>
@@ -72,11 +77,13 @@
       </div>
  
       <!-- Profile -->
-      <div class="icon-container">
-        <a href="${contextPath}/profile">
-          <img src="${contextPath}/resources/images/system/profile.jpg" class="icon-img" alt="Profile" />
-        </a>
-      </div>
+      <c:if test="${not empty customerId}">
+        <div class="icon-container">
+          <a href="${contextPath}/profile">
+            <img src="${contextPath}/resources/images/system/profile.jpg" class="icon-img" alt="Profile" />
+          </a>
+        </div>
+      </c:if>
     </div>
  
   </div>

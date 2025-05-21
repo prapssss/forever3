@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* Bill Page Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.bill-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.bill-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.bill-header h1 {
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+}
+
+.bill-info {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+}
+
+.bill-sections {
+    margin-bottom: 2rem;
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.section h2 {
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.details p {
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.details strong {
+    color: #2c3e50;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.items-table th,
+.items-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.items-table th {
+    background-color: #f1f3f5;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.items-table tfoot tr {
+    background-color: #f8f9fa;
+}
+
+.total-label {
+    text-align: right;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.total-amount {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.bill-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid #eee;
+}
+
+.thank-you {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.print-button,
+.continue-shopping {
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.print-button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.print-button:hover {
+    background-color: #1a252f;
+}
+
+.continue-shopping {
+    background-color: #e9ecef;
+    color: #2c3e50;
+}
+
+.continue-shopping:hover {
+    background-color: #dee2e6;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white;
+    }
+
+    .bill-container {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .section {
+        break-inside: avoid;
+    }
+} 

@@ -12,48 +12,32 @@
   <main>
     <h1>Checkout</h1>
 
+    <c:if test="${not empty sessionScope.errorMessage}">
+        <div class="error-message">
+            ${sessionScope.errorMessage}
+        </div>
+        <c:remove var="errorMessage" scope="session"/>
+    </c:if>
+
     <c:choose>
-      <c:when test="${empty cart}">
-        <p>Your cart is empty.</p>
-        <a href="${pageContext.request.contextPath}/home">Go back to shopping</a>
+      <c:when test="${empty sessionScope.orderId}">
+        <p>No order found.</p>
+        <a href="${pageContext.request.contextPath}/viewCart">Go back to cart</a>
       </c:when>
       <c:otherwise>
-        <table border="1" cellpadding="8" cellspacing="0">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price (each)</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            <c:set var="total" value="0" />
-            <c:forEach var="item" items="${cart}">
-              <tr>
-                <td>${item.itemName}</td>
-                <td>${item.quantity}</td>
-                <td>$${item.itemPrice}</td>
-                <td>
-                  <c:set var="subtotal" value="${item.itemPrice * item.quantity}" />
-                  $${subtotal}
-                  <c:set var="total" value="${total + subtotal}" />
-                </td>
-              </tr>
-            </c:forEach>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
-              <td><strong>$${total}</strong></td>
-            </tr>
-          </tfoot>
-        </table>
-
-        <form action="${pageContext.request.contextPath}/checkout" method="post">
-          <!-- You can add payment or shipping info inputs here if needed -->
-          <button type="submit">Confirm Purchase</button>
-        </form>
+        <div class="checkout-container">
+          <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-details">
+              <p><strong>Order ID:</strong> ${sessionScope.orderId}</p>
+              <p><strong>Total Amount:</strong> NPR ${sessionScope.totalAmount}</p>
+            </div>
+          </div>
+          
+          <form action="${pageContext.request.contextPath}/payment" method="get">
+            <button type="submit" class="checkout-button">Proceed to Payment</button>
+          </form>
+        </div>
       </c:otherwise>
     </c:choose>
   </main>

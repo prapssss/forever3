@@ -15,18 +15,26 @@ import java.util.List;
 public class CheckoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<CartModel> cart = (List<CartModel>) session.getAttribute("cart");
         Integer customerId = (Integer) session.getAttribute("customerId");
 
-        if (cart == null || cart.isEmpty() || customerId == null) {
-            session.setAttribute("errorMessage", "Please login and add items to cart before checkout");
+        if (customerId == null) {
+            session.setAttribute("errorMessage", "Please login to proceed with checkout");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        if (cart == null || cart.isEmpty()) {
+            session.setAttribute("errorMessage", "Your cart is empty");
             response.sendRedirect(request.getContextPath() + "/viewCart");
             return;
         }
 
+        // Create order with Pending status
         Connection conn = null;
         PreparedStatement orderStmt = null;
         PreparedStatement orderItemStmt = null;
@@ -42,7 +50,8 @@ public class CheckoutController extends HttpServlet {
             }
 
             // Create order with Pending status
-            String insertOrderSQL = "INSERT INTO orders (customer_id, order_date, total_price, payment_status) VALUES (?, NOW(), ?, ?)";
+            String insertOrderSQL = "INSERT INTO orders (customer_id, order_date, total_price, payment_status) " +
+                                  "VALUES (?, NOW(), ?, ?)";
             orderStmt = conn.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS);
             orderStmt.setInt(1, customerId);
             orderStmt.setDouble(2, totalPrice);
@@ -78,8 +87,11 @@ public class CheckoutController extends HttpServlet {
             conn.commit();
             session.removeAttribute("cart");
 
-            // Redirect to payment page
-            response.sendRedirect(request.getContextPath() + "/payment");
+            // Store order details in session for payment page
+            session.setAttribute("orderId", orderId);
+            session.setAttribute("totalAmount", totalPrice);
+
+            request.getRequestDispatcher("/WEB-INF/pages/checkout.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             if (conn != null) {
@@ -100,5 +112,12 @@ public class CheckoutController extends HttpServlet {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // This method is no longer needed as we're handling everything in doGet
+        response.sendRedirect(request.getContextPath() + "/checkout");
     }
 }

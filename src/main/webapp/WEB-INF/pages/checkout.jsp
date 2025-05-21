@@ -4,51 +4,55 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Your Shopping Cart</title>
+<title>Checkout</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css" />
 </head>
 <body>
   <jsp:include page="header.jsp" />
   <main>
-    <h1>Your Shopping Cart</h1>
+    <h1>Checkout</h1>
+
     <c:choose>
       <c:when test="${empty cart}">
         <p>Your cart is empty.</p>
+        <a href="${pageContext.request.contextPath}/home">Go back to shopping</a>
       </c:when>
       <c:otherwise>
         <table border="1" cellpadding="8" cellspacing="0">
           <thead>
             <tr>
-              <th>Image</th>
-              <th>Product Name</th>
-              <th>Price</th>
+              <th>Product</th>
               <th>Quantity</th>
+              <th>Price (each)</th>
               <th>Subtotal</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            <c:set var="total" value="0" />
             <c:forEach var="item" items="${cart}">
               <tr>
-                <td>
-                  <img src="${pageContext.request.contextPath}/${item.imageUrl}" alt="${item.itemName}" width="80" />
-                </td>
                 <td>${item.itemName}</td>
-                <td>$${item.itemPrice}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.itemPrice * item.quantity}</td>
+                <td>$${item.itemPrice}</td>
                 <td>
-                  <form action="${pageContext.request.contextPath}/removeFromCart" method="post">
-                    <input type="hidden" name="itemId" value="${item.itemId}" />
-                    <button type="submit">Remove</button>
-                  </form>
+                  <c:set var="subtotal" value="${item.itemPrice * item.quantity}" />
+                  $${subtotal}
+                  <c:set var="total" value="${total + subtotal}" />
                 </td>
               </tr>
             </c:forEach>
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
+              <td><strong>$${total}</strong></td>
+            </tr>
+          </tfoot>
         </table>
+
         <form action="${pageContext.request.contextPath}/checkout" method="post">
-          <button type="submit">Proceed to Checkout</button>
+          <!-- You can add payment or shipping info inputs here if needed -->
+          <button type="submit">Confirm Purchase</button>
         </form>
       </c:otherwise>
     </c:choose>

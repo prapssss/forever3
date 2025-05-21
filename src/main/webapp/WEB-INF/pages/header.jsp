@@ -63,8 +63,11 @@
  
       <!-- Cart -->
       <div class="icon-container">
-        <a href="${contextPath}/cart">
+        <a href="${contextPath}/viewCart" class="cart-link">
           <img src="${contextPath}/resources/images/system/cart.jpg" class="icon-img" alt="Cart" />
+          <c:if test="${not empty sessionScope.cart}">
+            <span class="cart-count">${sessionScope.cart.size()}</span>
+          </c:if>
         </a>
       </div>
  

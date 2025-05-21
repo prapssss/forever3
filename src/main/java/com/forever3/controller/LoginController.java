@@ -1,11 +1,15 @@
 package com.forever3.controller;
  
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
  
 import com.forever3.model.UserModel;
 import com.forever3.service.LoginService;
 import com.forever3.util.CookieUtil;
 import com.forever3.util.SessionUtil;
+import com.forever3.config.DbConfig;
  
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -72,6 +76,23 @@ public class LoginController extends HttpServlet {
         System.out.println("Login Status: " + loginStatus);
 
         if (loginStatus != null && loginStatus) {
+            // Get customer ID from database
+            try (Connection conn = DbConfig.getDbConnection()) {
+                String sql = "SELECT id FROM customer WHERE user_name = ?";
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    stmt.setString(1, username);
+                    ResultSet rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        int customerId = rs.getInt("id");
+                        SessionUtil.setAttribute(req, "customerId", customerId);
+                        System.out.println("Customer ID set in session: " + customerId);
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error getting customer ID: " + e.getMessage());
+                e.printStackTrace();
+            }
+
             SessionUtil.setAttribute(req, "username", username);
             CookieUtil.addCookie(resp, "role", "customer", 3 * 50); // Role: customer
             resp.sendRedirect(req.getContextPath() + "/home");

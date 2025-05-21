@@ -14,6 +14,12 @@
   <main>
     <section class="product-page">
       <h1>Makeup Products</h1>
+      <c:if test="${not empty sessionScope.cartMessage}">
+        <div class="success-message">
+          ${sessionScope.cartMessage}
+        </div>
+        <c:remove var="cartMessage" scope="session"/>
+      </c:if>
       <div class="product-grid">
         <c:forEach var="product" items="${productList}">
           <div class="product-card">
@@ -21,11 +27,12 @@
 
             <h3>${product.itemName}</h3>
             <p class="product-price">$${product.itemPrice}</p>
-            <form method="post" action="${pageContext.request.contextPath}/addToCart">
-              <input type="hidden" name="productId" value="${product.itemId}" />
-              <input type="number" name="quantity" value="1" min="1" />
-              <button class="add-to-cart-btn">Add to Cart</button>
-            </form>
+           <form method="post" action="${pageContext.request.contextPath}/addToCart">
+    <input type="hidden" name="itemId" value="${product.itemId}" />
+    <input type="number" name="quantity" value="1" min="1" />
+    <button class="add-to-cart-btn">Add to Cart</button>
+</form>
+
           </div>
         </c:forEach>
       </div>

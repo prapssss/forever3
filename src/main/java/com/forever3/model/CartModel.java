@@ -7,20 +7,7 @@ public class CartModel {
     private int quantity;
     private String imageUrl;
 
-    // ✅ Add this no-arg constructor
-    public CartModel() {
-    }
-
-    public CartModel(int itemId, String itemName, double itemPrice, int quantity, String imageUrl) {
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.quantity = quantity;
-        this.imageUrl = imageUrl;
-    }
-
-    // Getters and setters
-
+    // Getters and Setters
     public int getItemId() { return itemId; }
     public void setItemId(int itemId) { this.itemId = itemId; }
 

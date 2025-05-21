@@ -21,7 +21,7 @@
         <div class="header-item">Product</div>
         <div class="header-item">Customer</div>
         <div class="header-item">Date</div>
-        <div class="header-item">Total (£)</div>
+        <div class="header-item">Total (NPR)</div>
         <div class="header-item">Payment Status</div>
     </div>
 
@@ -31,8 +31,8 @@
             <div class="order-name">${order.productName}</div>
             <div class="order-customer">${order.customerName}</div>
             <div class="order-date">${order.orderDate}</div>
-            <div class="order-total">£${order.totalPrice}</div>
-            <div class="order-type">${order.PaymentStatus}</div>
+            <div class="order-total">NPR ${order.totalPrice}</div>
+            <div class="order-type">${order.orderType}</div>
         </div>
     </c:forEach>
 </div>

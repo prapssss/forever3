@@ -13,7 +13,7 @@
   <jsp:include page="header.jsp" />
     <!-- Hero Section -->
     <section class="hero">
-        <img src="${pageContext.request.contextPath}/resources/images/system/aboutussecondimage.png" alt="Skincare products flatlay" class="hero-bg">
+        <img src="${pageContext.request.contextPath}/resources/images/system/aboutsusthirdimage.png" alt="Skincare products flatlay" class="hero-bg">
         <div class="container hero-content">
             <h1>About Us</h1>
             <p>Discover the story behind our passion for beauty and skincare</p>
@@ -26,7 +26,7 @@
             <div class="about-content">
                 <div class="about-image">
                     <div class="about-image-circle">
-                        <img src="${pageContext.request.contextPath}/resources/images/system/Woman with skincare product.png" alt="Woman with skincare product">
+                        <img src="${pageContext.request.contextPath}/resources/images/system/aboutussecondimage.png" alt="Woman with skincare product">
                     </div>
                 </div>
                 <div class="about-text">
@@ -87,7 +87,7 @@
         <div class="container">
             <div class="showcase-container">
                 <div class="showcase-image">
-                    <img src="${pageContext.request.contextPath}/resources/images/system/aboutussecondimage.png" alt="Skincare product lineup">
+                    <img src="${pageContext.request.contextPath}/resources/images/system/aboutsusthirdimage.png" alt="Skincare product lineup">
                 </div>
                 <div class="showcase-content">
                     <h2>Our Signature Collection</h2>
@@ -105,7 +105,7 @@
             <div class="testimonial-container">
                 <div class="testimonial-image">
                     <div class="testimonial-image-circle">
-                        <img src="${pageContext.request.contextPath}/resources/images/system/aboutusthirdimage.png" alt="Customer testimonial">
+                        <img src="${pageContext.request.contextPath}/resources/images/system/Woman with skincare product.png" alt="Customer testimonial">
                     </div>
                 </div>
                 <div class="testimonial-content">

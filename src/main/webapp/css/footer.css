@@ -6,7 +6,7 @@
   }
   
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial';
     line-height: 1.6;
   }
   
@@ -47,7 +47,7 @@
     color: #5e2d0e; /* Slightly lighter */
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Arial';
     letter-spacing: 1px;
     font-size: 18px;
   }

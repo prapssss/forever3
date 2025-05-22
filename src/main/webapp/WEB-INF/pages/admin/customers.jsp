@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Customer Management</title>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/customers.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,8 +20,22 @@
 
     <!-- Admin Header -->
     <div class="admin-header">
-        <h1>Customer Management</h1>
+        <h1><i class="fas fa-users"></i> Customer Management</h1>
     </div>
+
+    <!-- Alert Messages -->
+    <c:if test="${not empty sessionScope.errorMessage}">
+        <div class="alert alert-error">
+            ${sessionScope.errorMessage}
+            <c:remove var="errorMessage" scope="session"/>
+        </div>
+    </c:if>
+    <c:if test="${not empty sessionScope.successMessage}">
+        <div class="alert alert-success">
+            ${sessionScope.successMessage}
+            <c:remove var="successMessage" scope="session"/>
+        </div>
+    </c:if>
 
     <!-- Customer List -->
     <div class="customer-list">
@@ -43,8 +59,10 @@
 
                 <div class="customer-email">${customer.email}</div>
                 <div class="customer-phone">${customer.number}</div>
-                <div class="customer-orders">0</div> <!-- Placeholder, update when order linking is added -->
-                <div class="customer-status paid">Paid</div> <!-- Placeholder, can be dynamic in the future -->
+                <div class="customer-orders">${customerOrderCounts[customer.id] != null ? customerOrderCounts[customer.id] : 0}</div>
+                <div class="customer-status ${customerPaymentStatus[customer.id] == 'Paid' ? 'paid' : 'unpaid'}">
+                    ${customerPaymentStatus[customer.id] != null ? customerPaymentStatus[customer.id] : 'Pending'}
+                </div>
 
                 <div class="customer-actions">
                     <!-- View Button -->

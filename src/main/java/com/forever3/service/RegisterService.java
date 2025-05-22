@@ -74,5 +74,23 @@ public class RegisterService {
             return false;
         }
     }
+ 
+    public boolean updateUserImage(String userName, String imageUrl) {
+        if (dbConn == null) {
+            System.err.println("Database connection is not available.");
+            return false;
+        }
+ 
+        String query = "UPDATE customer SET image_url = ? WHERE user_name = ?";
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            stmt.setString(1, imageUrl);
+            stmt.setString(2, userName);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating user image: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
  

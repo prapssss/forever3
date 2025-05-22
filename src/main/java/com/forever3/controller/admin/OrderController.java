@@ -21,8 +21,20 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        loadOrders(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        loadOrders(request, response);
+    }
+
+    private void loadOrders(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         List<OrderModel> orders = orderService.getAllOrders();
         request.setAttribute("orders", orders);
+        request.setAttribute("activePage", "orders");
         request.getRequestDispatcher("/WEB-INF/pages/admin/order.jsp").forward(request, response);
     }
 }

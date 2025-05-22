@@ -2,6 +2,7 @@ package com.forever3.controller.admin;
 
 import com.forever3.model.ProductModel;
 import com.forever3.service.ProductService;
+import com.forever3.util.ImageUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,13 +14,15 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 
 @WebServlet(asyncSupported = true, urlPatterns = {"/addproduct"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1MB
-                 maxFileSize = 5 * 1024 * 1024,    // 5MB
-                 maxRequestSize = 10 * 1024 * 1024) // 10MB
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024, // 1MB
+    maxFileSize = 5 * 1024 * 1024,    // 5MB
+    maxRequestSize = 10 * 1024 * 1024 // 10MB
+)
 public class AddProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
     private ProductService productService = new ProductService();
+    private ImageUtil imageUtil = new ImageUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,24 +44,15 @@ public class AddProductController extends HttpServlet {
             int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
             int supplierId = Integer.parseInt(request.getParameter("supplierId"));
 
-         // Handle uploaded image
+            // Upload image
             Part imagePart = request.getPart("imageFile");
-            String fileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+            String rootPath = getServletContext().getRealPath("/");
+            String imageName = imageUtil.uploadImage(imagePart, rootPath, "system");
 
-            // Upload path inside webapp folder
-            String uploadPath = getServletContext().getRealPath("/resources/images/system");
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdirs();
+            if (imageName == null) {
+                throw new IOException("Failed to upload image");
+            }
 
-            // Save the file
-            String filePath = uploadPath + File.separator + fileName;
-            imagePart.write(filePath);
-
-            // Store this relative path in DB
-            String imageUrl = "resources/images/system/" + fileName;
-
-
-            // Create ProductModel
             ProductModel product = new ProductModel();
             product.setItemName(itemName);
             product.setDescription(description);
@@ -66,12 +60,9 @@ public class AddProductController extends HttpServlet {
             product.setItemPrice(itemPrice);
             product.setStockQuantity(stockQuantity);
             product.setSupplierId(supplierId);
-            product.setImageUrl(imageUrl);
+            product.setImageUrl(imageName); // ✅ Save just the filename
 
-            // Save to database
             productService.addProduct(product);
-
-            // Redirect
             response.sendRedirect("productmanagement");
 
         } catch (SQLException | NumberFormatException e) {

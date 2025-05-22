@@ -6,11 +6,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Skin Care - Forever3</title>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css" />
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/skincare.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <jsp:include page="header.jsp" />
+  <%@ include file="header.jsp" %>
   <main>
     <section class="product-page">
       <h1>Skin Care Products</h1>
@@ -25,12 +27,15 @@
           <div class="product-card">
             <img src="${pageContext.request.contextPath}/resources/images/system/${product.imageUrl}" alt="${product.itemName}" />
             <h3>${product.itemName}</h3>
-            <p class="product-price">$${product.itemPrice}</p>
-            <form method="post" action="${pageContext.request.contextPath}/addToCart">
-              <input type="hidden" name="itemId" value="${product.itemId}" />
-              <input type="number" name="quantity" value="1" min="1" />
-              <button class="add-to-cart-btn">Add to Cart</button>
-            </form>
+            <p class="product-description">${product.description}</p>
+            <div class="product-actions">
+              <p class="product-price">NPR ${product.itemPrice}</p>
+              <form method="post" action="${pageContext.request.contextPath}/addToCart">
+                <input type="hidden" name="itemId" value="${product.itemId}" />
+                <input type="number" name="quantity" value="1" min="1" />
+                <button class="add-to-cart-btn">Add to Cart</button>
+              </form>
+            </div>
           </div>
         </c:forEach>
       </div>

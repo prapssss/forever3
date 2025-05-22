@@ -18,19 +18,19 @@
     </div>
 
     <div class="dashboard-cards">
-    <div class="card">
-        <h3 class="card-title">Total Customers</h3>
-        <div class="card-value">${totalCustomers}</div>
+        <div class="card">
+            <h3 class="card-title">Total Customers</h3>
+            <div class="card-value">${totalCustomers}</div>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Total Orders</h3>
+            <div class="card-value">${totalOrders}</div>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Total Products</h3>
+            <div class="card-value">${totalProducts}</div>
+        </div>
     </div>
-    <div class="card">
-        <h3 class="card-title">Total Orders</h3>
-        <div class="card-value">${totalOrders}</div>
-    </div>
-    <div class="card">
-        <h3 class="card-title">Total Products</h3>
-        <div class="card-value">${totalProducts}</div>
-    </div>
-</div>
 
 
     <h2 class="section-title">Recent Customers</h2>

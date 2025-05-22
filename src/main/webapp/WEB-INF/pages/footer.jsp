@@ -20,22 +20,11 @@
           </div>
           <p>Your destination for premium makeup and skincare products that enhance your natural beauty.</p>
         </div>
-        
-        <!-- Quick links section -->
-        <div>
-          <h3>Quick Links</h3>
-          <div class="quick-links">
-            <a href="home.jsp">Home</a>
-            <a href="makeup.jsp">MakeUp</a>
-            <a href="skincare.jsp">SkinCare</a>
-            <a href="aboutus.jsp">AboutUs</a>
-            <a href="contact.jsp">Contact Us</a>
-          </div>
-        </div>
+       
         
         <!-- Contact section -->
         <div>
-          <h3>Contact Us</h3>
+         <a href="${pageContext.request.contextPath}/contactus">ContactUs</a>
           <div>
             <div class="contact-item">
               <span>Durbarmarg, Kathmandu</span>

@@ -56,7 +56,7 @@ public class EditProductController extends HttpServlet {
                 imagePart.write(filePath);
 
                 // Update the path saved in DB or model
-                imageUrl = "resources/images/system/" + fileName;
+                imageUrl = "/resources/images/system/" + fileName;
             }
 
 

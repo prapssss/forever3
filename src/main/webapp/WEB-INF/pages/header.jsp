@@ -33,7 +33,7 @@
         <li><a href="${contextPath}/skincare">SkinCare</a></li>
         <li><a href="${contextPath}/makeup">MakeUp</a></li>
         <li><a href="${contextPath}/aboutus">AboutUs</a></li>
-        <li><a href="${contextPath}/contactus">ContactUs</a></li>
+        
         <c:if test="${not empty customerId}">
           <li><a href="${contextPath}/orderHistory">Order History</a></li>
         </c:if>
@@ -43,12 +43,13 @@
     <!-- Right Section -->
     <div class="header-right">
       <!-- Search -->
-      <div class="search-container">
+    <div class="search-container">
         <input type="text" class="search-input" placeholder="search" />
         <button class="search-button">
-          <img src="${contextPath}/resources/images/system/search.jpg" class="icon-img" alt="Search" />
+          <img src="${pageContext.request.contextPath}/resources/images/system/search.jpg" class="icon-img" alt="Search" />
         </button>
       </div>
+
  
       <!-- Auth Buttons -->
       <div class="auth-button-container">
@@ -69,7 +70,7 @@
       <!-- Cart -->
       <div class="icon-container">
         <a href="${contextPath}/viewCart" class="cart-link">
-          <img src="${contextPath}/resources/images/system/cart.jpg" class="icon-img" alt="Cart" />
+          <img src="${pageContext.request.contextPath}/resources/images/system/cart.jpg" class="icon-img" alt="Cart" />
           <c:if test="${not empty sessionScope.cart}">
             <span class="cart-count">${sessionScope.cart.size()}</span>
           </c:if>
@@ -80,7 +81,7 @@
       <c:if test="${not empty customerId}">
         <div class="icon-container">
           <a href="${contextPath}/profile">
-            <img src="${contextPath}/resources/images/system/profile.jpg" class="icon-img" alt="Profile" />
+            <img src="${pageContext.request.contextPath}/resources/images/system/profile-logo.jpg" class="icon-img" alt="Profile" />
           </a>
         </div>
       </c:if>

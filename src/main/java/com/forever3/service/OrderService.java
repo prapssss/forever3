@@ -9,13 +9,16 @@ import java.util.List;
 
 public class OrderService {
 	private static final String SELECT_ALL_ORDERS = 
-		    "SELECT o.order_id, i.item_name AS product_name, " +
+		    "SELECT o.order_id, " +
+		    "GROUP_CONCAT(i.item_name SEPARATOR ', ') AS product_name, " +
 		    "CONCAT(c.first_name, ' ', c.last_name) AS customer_name, " +
 		    "o.order_date, o.total_price, o.payment_status AS order_type " +
 		    "FROM orders o " +
 		    "JOIN order_items oi ON o.order_id = oi.order_id " +
 		    "JOIN item i ON oi.item_id = i.item_id " +
-		    "JOIN customer c ON o.customer_id = c.id";
+		    "JOIN customer c ON o.customer_id = c.id " +
+		    "GROUP BY o.order_id, c.first_name, c.last_name, o.order_date, o.total_price, o.payment_status " +
+		    "ORDER BY o.order_date DESC";
 
 
 

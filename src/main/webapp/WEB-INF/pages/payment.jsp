@@ -27,16 +27,7 @@
                 <p>Total Amount: NPR ${totalAmount}</p>
             </div>
 
-            <div class="shipping-details">
-                <h2>Shipping Details</h2>
-                <div class="shipping-info">
-                    <p><strong>Name:</strong> ${sessionScope.shippingName}</p>
-                    <p><strong>Address:</strong> ${sessionScope.shippingAddress}</p>
-                    <p><strong>City:</strong> ${sessionScope.shippingCity}</p>
-                    <p><strong>Postal Code:</strong> ${sessionScope.shippingPostalCode}</p>
-                    <p><strong>Phone:</strong> ${sessionScope.shippingPhone}</p>
-                </div>
-            </div>
+            
 
             <form action="${pageContext.request.contextPath}/payment" method="post" class="payment-form">
                 <input type="hidden" name="orderId" value="${orderId}">

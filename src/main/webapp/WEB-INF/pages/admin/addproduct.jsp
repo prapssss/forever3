@@ -17,7 +17,7 @@
 
         /* Body and overall page layout */
         body {
-            background-color: #f5f3ef; /* NEW BACKGROUND COLOR */
+            background-color: #f5f3ef; /*  BACKGROUND COLOR */
             margin: 0;
             padding: 15px;
 

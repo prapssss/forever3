@@ -2,7 +2,9 @@ package com.forever3.util;
 
 import java.util.regex.Pattern;
 import jakarta.servlet.http.Part;
-
+/**
+ * @author Prapti Adhikari
+ */
 public class ValidationUtil {
 
     // 1. Validate if a field is null or empty

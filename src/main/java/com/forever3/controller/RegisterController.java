@@ -19,8 +19,7 @@ import jakarta.servlet.http.Part;
  
  
 /**
- * RegisterController handles user registration requests and processes form
- * submissions. It also manages file uploads and account creation.
+ * @author Prapti Adhikari
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB

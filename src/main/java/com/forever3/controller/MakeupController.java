@@ -10,12 +10,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet("/makeup")
 public class MakeupController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Correct category ID for Makeup (assuming 1 is Makeup)
+    // Correct category ID for Makeup 
     private static final int MAKEUP_CATEGORY_ID = 1;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

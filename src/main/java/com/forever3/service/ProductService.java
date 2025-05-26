@@ -5,7 +5,9 @@ import com.forever3.model.ProductModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Prapti Adhikari
+ */
 public class ProductService {
 
     private final String jdbcURL = "jdbc:mysql://localhost:3306/forever3";
@@ -148,7 +150,7 @@ public class ProductService {
         }
     }
 
-    // Get products by category ID (for skincare, makeup, etc.)
+    // Get products by category ID 
     public List<ProductModel> getProductsByCategoryId(int categoryId) {
         List<ProductModel> products = new ArrayList<>();
         String sql = "SELECT i.item_id, i.item_name, i.description, i.category_id, c.category_name, "

@@ -22,7 +22,7 @@
     <c:choose>
       <c:when test="${empty sessionScope.orderId}">
         <p>No order found.</p>
-        <a href="${pageContext.request.contextPath}/viewCart">Go back to cart</a>
+        <a href="${pageContext.request.contextPath}/cart">Go back to cart</a>
       </c:when>
       <c:otherwise>
         <div class="checkout-container">

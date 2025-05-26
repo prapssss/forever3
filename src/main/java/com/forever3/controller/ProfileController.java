@@ -11,9 +11,8 @@ import com.forever3.service.ProfileService;
 import com.forever3.util.PasswordUtil;
  
 /**
-* ProfileController is responsible for handling profile-related requests.
-* It interacts with the ProfileService to get and update user profile details.
-*/
+ * @author Prapti Adhikari
+ */
 @WebServlet(urlPatterns = { "/profile", "/profile/update" })
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024)
 public class ProfileController extends HttpServlet {
@@ -91,14 +90,31 @@ public class ProfileController extends HttpServlet {
         Part imagePart = request.getPart("profileImage");
         if (imagePart != null && imagePart.getSize() > 0) {
             String fileName = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("/resources/images/profiles");
+            
+            // Create unique filename to avoid conflicts
+            String uniqueFileName = System.currentTimeMillis() + "_" + fileName;
+            
+          
+            String uploadPath = getServletContext().getRealPath("/resources/imagescustomer/");
             java.io.File uploadDir = new java.io.File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdirs();
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
  
-            String filePath = uploadPath + java.io.File.separator + fileName;
-            imagePart.write(filePath);
- 
-            currentUser.setImageUrl("/resources/images/profiles/" + fileName);
+            String filePath = uploadPath + java.io.File.separator + uniqueFileName;
+            
+            try {
+                imagePart.write(filePath);
+                
+                currentUser.setImageUrl("/resources/imagescustomer/" + uniqueFileName);
+                System.out.println("Image uploaded successfully: " + filePath);
+                System.out.println("Image URL set to: " + currentUser.getImageUrl());
+            } catch (IOException e) {
+                System.err.println("Error uploading image: " + e.getMessage());
+                session.setAttribute("errorMessage", "Failed to upload image");
+                response.sendRedirect(request.getContextPath() + "/profile");
+                return;
+            }
         }
  
         // Update profile

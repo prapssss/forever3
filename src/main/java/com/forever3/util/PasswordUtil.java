@@ -17,7 +17,9 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-
+/**
+ * @author Prapti Adhikari
+ */
 public class PasswordUtil {
 	private static final String ENCRYPT_ALGO = "AES/GCM/NoPadding";
 

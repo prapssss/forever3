@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class UpdateCart
+ * @author Prapti Adhikari
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/updatecart" })
 public class UpdateCartController extends HttpServlet {

@@ -3,7 +3,9 @@ package com.forever3.util;
 import java.io.File;
 import java.io.IOException;
 import jakarta.servlet.http.Part;
-
+/**
+ * @author Prapti Adhikari
+ */
 public class ImageUtil {
 
     public String getImageNameFromPart(Part part) {
@@ -38,7 +40,7 @@ public class ImageUtil {
             String imageName = getImageNameFromPart(part);
             String filePath = physicalPath + File.separator + imageName;
             part.write(filePath);
-            return imageName; // ✅ Only store file name in DB
+            return imageName; //  Only store file name in DB
         } catch (IOException e) {
             e.printStackTrace();
             return null;

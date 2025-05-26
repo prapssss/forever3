@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet(asyncSupported = true, urlPatterns = { "/deleteproduct" })
 public class DeleteProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;

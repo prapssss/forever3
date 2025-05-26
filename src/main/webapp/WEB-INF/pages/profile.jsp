@@ -17,9 +17,19 @@
         <div class="profile-container">
             <h1>My Profile</h1>
             
+            <!-- Display success/error messages -->
+            <c:if test="${not empty sessionScope.successMessage}">
+                <div class="success-message">${sessionScope.successMessage}</div>
+                <c:remove var="successMessage" scope="session"/>
+            </c:if>
+            <c:if test="${not empty sessionScope.errorMessage}">
+                <div class="error-message">${sessionScope.errorMessage}</div>
+                <c:remove var="errorMessage" scope="session"/>
+            </c:if>
+            
             <div class="profile-content">
                 <div class="profile-image">
-                    <img src="${pageContext.request.contextPath}${user.imageUrl}" alt="Profile Picture" id="profilePic">
+                   <img src="${pageContext.request.contextPath}/resources/images/customer/${user.imageUrl}" alt="Profile Picture" id="profilePic">
                     <div class="image-upload">
                         <label for="profileImage" class="upload-btn">Change Photo</label>
                         <input type="file" id="profileImage" name="profileImage" accept="image/*" style="display: none;">
@@ -58,6 +68,9 @@
                             <input type="password" id="password" name="password" placeholder="Enter new password" disabled>
                         </div>
 
+                        <!-- Hidden input to track selected image file -->
+                        <input type="file" id="hiddenProfileImage" name="profileImage" accept="image/*" style="display: none;">
+
                         <div class="button-group">
                             <button type="button" id="editBtn" class="edit-btn">Edit Profile</button>
                             <button type="submit" id="saveBtn" class="save-btn" style="display: none;">Save Changes</button>
@@ -72,8 +85,19 @@
     <jsp:include page="footer.jsp" />
 
     <script>
+        let originalValues = {};
+        let selectedFile = null;
+
         function enableEditing() {
             const inputs = document.querySelectorAll('#profileForm input:not([name="user_name"])');
+            
+            // Store original values
+            inputs.forEach(input => {
+                if (input.type !== 'file' && input.type !== 'password') {
+                    originalValues[input.name] = input.value;
+                }
+            });
+            
             inputs.forEach(input => input.disabled = false);
             
             document.getElementById('editBtn').style.display = 'none';
@@ -83,6 +107,26 @@
 
         function disableEditing() {
             const inputs = document.querySelectorAll('#profileForm input');
+            
+            // Restore original values
+            Object.keys(originalValues).forEach(name => {
+                const input = document.querySelector(`input[name="${name}"]`);
+                if (input) {
+                    input.value = originalValues[name];
+                }
+            });
+            
+            // Reset password field
+            document.getElementById('password').value = '';
+            
+            // Reset image if changed
+            if (selectedFile) {
+                document.getElementById('profilePic').src = "${pageContext.request.contextPath}${user.imageUrl}";
+                selectedFile = null;
+                document.getElementById('profileImage').value = '';
+                document.getElementById('hiddenProfileImage').value = '';
+            }
+            
             inputs.forEach(input => input.disabled = true);
             
             document.getElementById('editBtn').style.display = 'inline-block';
@@ -93,15 +137,33 @@
         document.getElementById('editBtn').addEventListener('click', enableEditing);
         document.getElementById('cancelBtn').addEventListener('click', disableEditing);
 
-        // Handle image preview
+        // Handle image preview and file selection
         document.getElementById('profileImage').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
+                selectedFile = file;
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('profilePic').src = e.target.result;
                 }
                 reader.readAsDataURL(file);
+                
+                // Copy the file to the hidden input in the form
+                const hiddenInput = document.getElementById('hiddenProfileImage');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                hiddenInput.files = dataTransfer.files;
+            }
+        });
+
+        // Form submission handler
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            // Ensure the selected file is included in the form submission
+            if (selectedFile) {
+                const hiddenInput = document.getElementById('hiddenProfileImage');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(selectedFile);
+                hiddenInput.files = dataTransfer.files;
             }
         });
     </script>

@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet("/editproduct")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024)
 public class EditProductController extends HttpServlet {

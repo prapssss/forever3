@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author Kriti Tripathi
+ * @author Prapti Adhikari
  */
 @WebServlet(asyncSupported = true, urlPatterns = {"/home", "/"})
 

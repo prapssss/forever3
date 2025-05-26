@@ -19,7 +19,7 @@
         <!-- Add image if available -->
         <c:if test="${not empty customer.imageUrl}">
             <div class="image-container">
-                <img src="${contextPath}${customer.imageUrl}" alt="${customer.firstName} ${customer.lastName}" class="customer-image">
+                <img src="${contextPath}/resources/images/customer/${customer.imageUrl}" alt="${customer.firstName} ${customer.lastName}" class="customer-image">
             </div>
         </c:if>
         

@@ -1,5 +1,5 @@
 package com.forever3.service;
- 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +7,9 @@ import java.sql.SQLException;
  
 import com.forever3.config.DbConfig;
 import com.forever3.model.UserModel;
- 
+/**
+ * @author Prapti Adhikari
+ */
 public class ProfileService {
  
     // Get user profile by userId

@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet("/deleteorder")
 public class DeleteOrderController extends HttpServlet {
 
@@ -76,7 +78,7 @@ public class DeleteOrderController extends HttpServlet {
             request.getSession().setAttribute("errorMessage", "An error occurred while deleting the order: " + e.getMessage());
         }
 
-        // Always redirect back to the order page
+        // redirect back to the order page
         response.sendRedirect(request.getContextPath() + "/order");
     }
 } 

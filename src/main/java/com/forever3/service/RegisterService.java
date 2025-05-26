@@ -8,9 +8,8 @@ import com.forever3.config.DbConfig;
 import com.forever3.model.UserModel;
  
 /**
-* RegisterService handles the registration of new users.
-* It manages database interactions for user registration.
-*/
+ * @author Prapti Adhikari
+ */
 public class RegisterService {
  
     private Connection dbConn;

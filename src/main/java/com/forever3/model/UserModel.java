@@ -1,5 +1,7 @@
 package com.forever3.model;
-
+/**
+ * @author Prapti Adhikari
+ */
 public class UserModel {
 
 	private int id;

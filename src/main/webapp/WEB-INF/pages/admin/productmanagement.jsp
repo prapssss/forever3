@@ -53,7 +53,7 @@
                                 <button class="action-btn stock-btn" type="submit">Add Stock</button>
                             </form>
 
-                            <!-- Delete Form - uses POST to productmanagement servlet -->
+                            
                             <form action="productmanagement" method="post" style="display:inline;" onsubmit="return confirm('Delete this product?');">
                                 <input type="hidden" name="id" value="${product.itemId}">
                                 <input type="hidden" name="action" value="delete">

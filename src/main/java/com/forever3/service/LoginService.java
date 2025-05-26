@@ -10,8 +10,7 @@ import com.forever3.model.UserModel;
 import com.forever3.util.PasswordUtil;
 
 /**
- * Service class for handling login operations. Connects to the database,
- * verifies user credentials, and returns login status.
+ * @author Prapti Adhikari
  */
 public class LoginService {
 

@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet("/removeFromCart")
 public class RemoveFromCartController extends HttpServlet {
     private static final long serialVersionUID = 1L;

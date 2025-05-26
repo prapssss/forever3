@@ -34,9 +34,9 @@
                   <img src="${pageContext.request.contextPath}/${item.imageUrl}" alt="${item.itemName}" width="80" />
                 </td>
                 <td>${item.itemName}</td>
-                <td>$${item.itemPrice}</td>
+                <td>NPR ${item.itemPrice}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.itemPrice * item.quantity}</td>
+                <td>NPR ${item.itemPrice * item.quantity}</td>
                 <td>
                   <form action="${pageContext.request.contextPath}/removeFromCart" method="post">
                     <input type="hidden" name="itemId" value="${item.itemId}" />

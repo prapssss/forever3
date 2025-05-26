@@ -9,7 +9,9 @@ import java.io.IOException;
 
 import com.forever3.util.CookieUtil;
 import com.forever3.util.SessionUtil;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet(asyncSupported = true, urlPatterns = {"/logout"})
 public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

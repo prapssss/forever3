@@ -10,7 +10,9 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
-
+/**
+ * @author Prapti Adhikari
+ */
 @WebServlet("/checkout")
 public class CheckoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -117,7 +119,7 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // This method is no longer needed as we're handling everything in doGet
+    
         response.sendRedirect(request.getContextPath() + "/checkout");
     }
 }
